@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal Sweep — Pre-Token Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="mast">
+  <div class="brand"><span class="blip"></span> SIGNAL&nbsp;SWEEP</div>
+  <p class="tag">Pre-token radar &middot; snapshot <span id="asOf">…</span> &middot; implied value is a model estimate, not a price</p>
+</header>
+<section class="stats" id="stats"></section>
+<section class="model-note">
+  <h2>How a number is earned</h2>
+  <p id="formula"></p>
+  <p>Each category carries its own FDV/TVL multiple (chains 2.20&times;, DEX 1.10&times;, lending 0.85&times;, curators 0.55&times;, stables 0.50&times;). Growth moves the score with clamped 7-day TVL change, longevity rewards years already live with no token on record, and breadth adds 3% per extra chain up to five. Protocols that already record a token are counted separately and never ranked here.</p>
+</section>
+<nav class="controls">
+  <label>Search <input id="q" type="search" placeholder="name, slug, chain…"></label>
+  <label>Category <select id="cat"><option value="">All categories</option></select></label>
+  <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+  <div class="toggle" role="group" aria-label="Scope">
+    <button id="scopeAll" class="on" type="button">All pre-token</button>
+    <button id="scopeWatch" type="button">Watchlist only</button>
+  </div>
+  <span id="count" class="count"></span>
+</nav>
+<section id="detail" class="detail" hidden></section>
+<main>
+  <table id="board">
+    <thead><tr>
+      <th data-sort="rank">#</th><th data-sort="name">Protocol</th>
+      <th data-sort="tvl_usd">TVL</th><th data-sort="change_7d">7d</th>
+      <th data-sort="years_live">Live</th><th data-sort="implied_value_usd">Implied value</th>
+      <th>Scope</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p id="empty" class="empty" hidden>No protocol matches this filter. Loosen the search or pick another category.</p>
+</main>
+<footer>Built only from the sealed snapshot: TVL, 7-day change, listing age, category and chains. No token is promised for any row.</footer>
+<script src="../data.js"></script>
+<script src="format.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
